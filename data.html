@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Search</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
+    <link rel="stylesheet" href="data.css" />
+    
+  </link>
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="search-container">
+        <input type="text" id="country" placeholder="Enter country" />
+        <button onclick="handleSearch()">Search</button>
+      </div>
+
+      <div id="loading" class="loading" style="display: none">Loading...</div>
+
+      <div id="error-message" class="error-message" style="display: none">
+        Country not found or invalid. Please try again.
+      </div>
+
+      <div
+        id="details-container"
+        class="details-container"
+        style="display: none"
+      >
+        <p id="borders"><strong>Borders:</strong> Loading...</p>
+        <p id="languages"><strong>Languages:</strong> Loading...</p>
+        
+      </div>
+    </div>
+
+    <script src="data.js">
+  </script>
+</html>
