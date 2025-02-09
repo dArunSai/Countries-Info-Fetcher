@@ -50,7 +50,7 @@ async function handleSearch() {
     const data = await response.json();
     const countryDetails = data[0];
 
-    console.log(countryDetails.languages);
+    console.log(countryDetails);
 
     let borders = [];
     if (countryDetails.borders) {
