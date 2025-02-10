@@ -2,14 +2,19 @@
 
 @keyframes backgroundAnimation {
   0% {
-    background-color: #f4f4f9;
+    background-color: #3674B5;
   }
-  50% {
-    background-color: #dfe9f3;
+  25% {
+    background-color: #578FCA;
   }
-  100% {
-    background-color: #e3f2fd;
+ 50% {
+    background-color: #A1E3F9;
   }
+100%{
+background-color: #D1F8EF;
+
+}
+
 }
 
 body {
