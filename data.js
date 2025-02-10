@@ -99,26 +99,26 @@ async function handleSearch() {
         Object.values(countryDetails.currencies)[0].name
       } (${Object.values(countryDetails.currencies)[0].symbol})</p>
       <p><strong>States:</strong></p>
-      <ul>${
+      <ol>${
         states.length > 0
           ? states.map((s) => `<li>${s}</li>`).join("")
           : "<li>N/A</li>"
-      }</ul>
+      }</ol>
       <p><strong>Borders:</strong></p>
-      <ul>${
+      <ol>${
         borders.length > 0
           ? borders.map((b) => `<li>${b}</li>`).join("")
           : "<li>None</li>"
-      }</ul>
+      }</ol>
       <p><strong>Languages:</strong></p>
-      <ul>${
+      <ol>${
         languagesList.length > 0
           ? languagesList
               .split(", ")
               .map((l) => `<li>${l}</li>`)
               .join("")
           : "<li>N/A</li>"
-      }</ul>
+      }</ol>
       <div style="text-decoration:none; overflow:hidden;max-width:100%;width:500px;height:500px;">
           <div id="embed-map-canvas" style="height:100%; width:100%;max-width:100%;">
               <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=${
