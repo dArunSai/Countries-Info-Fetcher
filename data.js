@@ -107,9 +107,9 @@ async function handleSearch() {
               .join("")
           : "<li>N/A</li>"
       }</ul>
-      <p><strong>Map:</strong> <a href="${
-        countryDetails.maps.googleMaps
-      }" target="_blank">View on Google Maps</a></p>
+      <p><strong>Map:</strong> <a href="
+        https://www.google.com/maps/embed/v1/place?q=${countryDeatails.name.common}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8
+      " target="_blank">View on Google Maps</a></p>
       `;
 
     detailsContainer.style.display = "block";
