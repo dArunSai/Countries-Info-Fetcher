@@ -78,7 +78,10 @@ body {
   max-height: 60vh; /* Ensure it doesn't take up the full screen height */
   overflow-y: auto; /* Add scrolling for overflowing content */
 }
-
+#render {
+    width: 450px;
+    height: 250px;
+}
 .details-container ul {
   text-align: left; /* Align lists to the left */
   margin: 0;
