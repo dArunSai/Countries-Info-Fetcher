@@ -2,19 +2,17 @@
 
 @keyframes backgroundAnimation {
   0% {
-    background-color: #3674B5;
+    background-color: #3674b5;
   }
   25% {
-    background-color: #578FCA;
+    background-color: #578fca;
   }
- 50% {
-    background-color: #A1E3F9;
+  50% {
+    background-color: #a1e3f9;
   }
-100%{
-background-color: #D1F8EF;
-
-}
-
+  100% {
+    background-color: #d1f8ef;
+  }
 }
 
 body {
@@ -72,7 +70,7 @@ body {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 80%;
+  width: 90%;
   /*max-width: 500px;*/
   background-color: rgba(255, 255, 255, 0.9);
   text-align: center;

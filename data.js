@@ -1,5 +1,17 @@
+const countryInput = document.getElementById("country");
 document.querySelector("button").addEventListener("click", function () {
   document.querySelector("input").value = "";
+});
+
+countryInput.addEventListener("keypress", function (event) {
+  //
+  if (event.key === "Enter") {
+    event.preventDefault();
+    handleSearch();
+    document.querySelector("input").value = "";
+
+    countryInput.blur();
+  }
 });
 
 async function fetchFullCountryName(code) {
@@ -107,9 +119,14 @@ async function handleSearch() {
               .join("")
           : "<li>N/A</li>"
       }</ul>
-      <p><strong>Map:</strong> <a href="${
-        countryDetails.maps.googleMaps
-      }" target="_blank">View on Google Maps</a></p>
+      <div style="text-decoration:none; overflow:hidden;max-width:100%;width:500px;height:500px;">
+          <div id="embed-map-canvas" style="height:100%; width:100%;max-width:100%;">
+              <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=${
+                countryDetails.name.common
+              }&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+              </iframe>
+          </div>
+      </div>
       `;
 
     detailsContainer.style.display = "block";
