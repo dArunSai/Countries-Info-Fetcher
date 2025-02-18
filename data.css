@@ -94,22 +94,20 @@ body {
   margin: 10px 0; /* Add spacing around the flag */
 }
 
-/* For smaller screens (tablets) */
+
 @media screen and (max-width: 1024px) {
   .container {
     width: 90%;
   }
 }
 
-/* For mobile screens */
 @media screen and (max-width: 768px) {
   .container {
-    width: 95%;
+    width: 100%;
     padding: 10px;
   }
 }
 
-/* For very small screens */
 @media screen and (max-width: 480px) {
   .container {
     width: 100%;
