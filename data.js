@@ -137,3 +137,28 @@ async function handleSearch() {
     loading.style.display = "none";
   }
 }
+/*
+// For smaller screens (tablets) 
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
+
+// For mobile screens 
+@media screen and (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+}
+
+// For very small screens 
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+*/
