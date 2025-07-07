@@ -94,7 +94,6 @@ body {
   margin: 10px 0; /* Add spacing around the flag */
 }
 
-
 @media screen and (max-width: 1024px) {
   .container {
     width: 90%;
