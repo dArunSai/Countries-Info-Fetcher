@@ -14,25 +14,41 @@ countryInput.addEventListener("keypress", function (event) {
   }
 });
 
+// NEW API
 async function fetchFullCountryName(code) {
   try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    const data = await response.json();
-    const country = data.find((c) => c.cca3 === code);
-    return country ? country.name.common : code;
+    const response = await fetch(`https://countries.dev/alpha/${code}`);
+
+    if (!response.ok) return code;
+
+    const country = await response.json();
+
+    return country.name || code;
   } catch (error) {
     return code;
   }
 }
 
+// OLD API
+// async function fetchFullCountryName(code) {
+//   try {
+//     const response = await fetch("https://restcountries.com/v3.1/all");
+//     const data = await response.json();
+//     const country = data.find((c) => c.cca3 === code);
+//     return country ? country.name.common : code;
+//   } catch (error) {
+//     return code;
+//   }
+// }
+
 async function getStates(countryName) {
   try {
     const response = await fetch(
-      "https://countriesnow.space/api/v0.1/countries/states"
+      "https://countriesnow.space/api/v0.1/countries/states",
     );
     const data = await response.json();
     const countryData = data.data.find(
-      (c) => c.name.toLowerCase() === countryName.toLowerCase()
+      (c) => c.name.toLowerCase() === countryName.toLowerCase(),
     );
     return countryData ? countryData.states.map((s) => s.name) : [];
   } catch (error) {
@@ -49,18 +65,30 @@ async function handleSearch() {
 
   detailsContainer.scrollTop = "0";
 
+  if (!country) {
+    errorMessage.style.display = "block";
+    loading.style.display = "none";
+    return;
+  }
+
   errorMessage.style.display = "none";
   detailsContainer.style.display = "none";
   loading.style.display = "block";
 
   try {
+    // const response = await fetch(
+    //   `https://restcountries.com/v3.1/name/${country}`,
+    // );
     const response = await fetch(
-      `https://restcountries.com/v3.1/name/${country}`
+      `https://countries.dev/name/${encodeURIComponent(country)}`,
     );
     if (!response.ok) throw new Error("Country not found");
 
     const data = await response.json();
-    const countryDetails = data[0];
+    // const countryDetails = data[0];
+    const countryDetails =
+      data.find((c) => c.name.toLowerCase() === country.toLowerCase()) ||
+      data[0];
 
     console.log(countryDetails);
 
@@ -68,25 +96,28 @@ async function handleSearch() {
     if (countryDetails.borders) {
       borders = await Promise.all(
         countryDetails.borders.map(
-          async (code) => await fetchFullCountryName(code)
-        )
+          async (code) => await fetchFullCountryName(code),
+        ),
       );
     }
 
-    const states = await getStates(countryDetails.name.common);
+    // const states = await getStates(countryDetails.name.common);
+    const states = await getStates(countryDetails.name);
 
-    const languagesList = countryDetails.languages
-      ? Object.values(countryDetails.languages).join(", ")
-      : "N/A"; // Display the languages as a list
+    // const languagesList = countryDetails.languages
+    //   ? Object.values(countryDetails.languages).join(", ")
+    //   : "N/A"; // Display the languages as a list
+
+    const languagesList = countryDetails.languages?.length
+      ? countryDetails.languages.map((lang) => lang.name).join(", ")
+      : "N/A";
 
     detailsContainer.innerHTML = `
-      <h2>${countryDetails.name.common}</h2>
-      <p><strong>Capital:</strong> ${
-        countryDetails.capital ? countryDetails.capital[0] : "N/A"
-      }</p>
+      <h2>${countryDetails.name}</h2>
+      <p><strong>Capital:</strong> ${countryDetails.capital || "N/A"}</p>
       <img src="${countryDetails.flags.svg}" alt="Flag of ${
-      countryDetails.name.common
-    }" width="150">
+        countryDetails.name
+      }" width="150">
       <p><strong>Population:</strong> ${
         countryDetails.population / 10000000
       } CR</p>
@@ -94,10 +125,12 @@ async function handleSearch() {
       <p><strong>Area:</strong> ${countryDetails.area} KM² </p>
       <p><strong>Latitude:</strong> ${countryDetails.latlng[0]}</p>
       <p><strong>Longitude:</strong> ${countryDetails.latlng[1]}</p>
-      <p><strong>Continent:</strong> ${countryDetails.continents}</p>
+      <p><strong>Subregion:</strong> ${countryDetails.subregion || "N/A"}</p>
       <p><strong>Currency:</strong> ${
-        Object.values(countryDetails.currencies)[0].name
-      } (${Object.values(countryDetails.currencies)[0].symbol})</p>
+        countryDetails.currencies?.[0]
+          ? `${countryDetails.currencies[0].name} (${countryDetails.currencies[0].symbol})`
+          : "N/A"
+      }</p>
       <p><strong>States:</strong></p>
       <ul>${
         states.length > 0
